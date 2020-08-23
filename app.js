@@ -24,7 +24,7 @@ const fruit = new Fruit({
   review: "Pretty solid as a fruit"
 });
 
-fruit.save();
+// fruit.save();
 
 const personSchema = new mongoose.Schema({
   name: String,
@@ -51,3 +51,27 @@ Fruit.find(function(err, fruits) {
     });
   }
 });
+
+/*  Fruit.updateOne({_id: "5f425779396a906c04680eb4"}, {name: "Peach"}, function(err) {
+   if(err) {
+     console.log(err);
+   } else {
+     console.log("Successfully updated!");
+   }
+ });  */
+
+/*  Fruit.deleteOne({_id: "5f425779396a906c04680eb4"}, function(err) {
+   if(err) {
+    console.log(err);
+  } else {
+    console.log("Successfully deleted!");
+  }
+ }); */
+
+/*  Person.deleteMany({name:"John"}, function(err) {
+  if(err) {
+    console.log(err);
+  } else {
+    console.log("Successfully deleted!");
+  }
+ }); */
