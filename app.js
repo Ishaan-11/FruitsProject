@@ -13,9 +13,9 @@ async function run() {
     await client.connect();
 
     // Establish and verify connection
-    await client.db("fruitsDB").command({ ping: 1 });
-
+    const database = client.db("fruitsDB");
     console.log("Connected successfully to server");
+    await insertDocument(database);
 
   } finally {
     // Ensures that the client will close when you finish/error
@@ -23,4 +23,28 @@ async function run() {
   }
 }
 run().catch(console.dir);
+
+ async function insertDocument(database, callback) {
+  //get the documents collection
+  const collection = database.collection("fruits");
+  //insert some documents
+  const fruitsDocuments = [
+    { 
+      name: "Apple",
+      score: 8,
+      review: "Great fruit"
+    },
+    { 
+      name: "Orange",
+      score: 6,
+      review: "Kinda sour"
+    },
+    { 
+      name: "Banana",
+      score: 9,
+      review: "Great stuff!"
+    }
+  ];
+  const result = await collection.insertMany(fruitsDocuments);
+}
 
