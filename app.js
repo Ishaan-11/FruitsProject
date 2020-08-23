@@ -15,7 +15,8 @@ async function run() {
     // Establish and verify connection
     const database = client.db("fruitsDB");
     console.log("Connected successfully to server");
-    await insertDocument(database);
+    // await insertDocument(database);
+    await findDocument(database);
 
   } finally {
     // Ensures that the client will close when you finish/error
@@ -46,5 +47,20 @@ run().catch(console.dir);
     }
   ];
   const result = await collection.insertMany(fruitsDocuments);
+}
+
+async function findDocument(database, callback) {
+  //get the documents collection
+  const collection = database.collection("fruits");
+  // Query for a fruits that has the title 'Apple'
+  const query = { name: "Apple" };
+
+  const options = {
+    // Include only the `name` and `score` fields in the returned document
+    projection: { _id: 0, name: 1, score: 1 },
+  };
+  const result = await collection.findOne(query, options);
+  // since this method returns the matched document, not a cursor, print it directly
+  console.log(result);
 }
 
